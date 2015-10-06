@@ -9,7 +9,7 @@ module.exports = {
 		var id = req.query.id;
 		// Look for user document referenced by ID
 		User.findById(id, function(err, user){
-			if(err){	// Error handling for user not found
+			if(user === null){	// Error handling for user not found
 				console.log('User not found');
 				console.log(err);
 				res.status(404).end();
@@ -49,7 +49,7 @@ module.exports = {
 		var code = data.code;
 		// Find user by given id
 		User.findById(id, function(err, user){
-			if(err) {	// Error handling when user is not found
+			if(user === null) {	// Error handling when user is not found
 				console.log('User not found');
 				console.log(err);
 				res.status(404).end();
@@ -63,7 +63,7 @@ module.exports = {
 				code: code,
 				expenses: []
 			}, function(err, newTrip){
-				if(err) {	// Error handling for code that's already taken
+				if(newTrip === null) {	// Error handling for code that's already taken
 					console.log('code is already taken');
 					console.log(err)
 					res.status(422).end();
@@ -93,7 +93,7 @@ module.exports = {
 		var code = data.code;
 		// Find trip by code
 		Trip.findOne({code:code}, function(err, trip){
-			if(err){	// Error handling for non-existent trip
+			if(trip === null){	// Error handling for non-existent trip
 				console.log('Such code does not exist');
 				console.log(err);
 				res.status(404).end('Such code does not exist');
@@ -101,7 +101,7 @@ module.exports = {
 			}
 			// Find user by given id
 			User.findById(id, function(err, user){
-				if(err){	// Error handling
+				if(user === null){	// Error handling
 					console.log('couldn\'t find user for some reason');
 					console.log(err);
 					res.status(404).end('User not found');
@@ -144,7 +144,7 @@ module.exports = {
 		var stakeholders = data.stakeholders;
 		// Find user by given id
 		User.findById(id, function(err, user){
-			if(err){ 	// Error handling for non-existent user
+			if(user === null){ 	// Error handling for non-existent user
 				console.log('User not found');
 				console.log(err);
 				res.status(404).end();
@@ -152,7 +152,7 @@ module.exports = {
 			}
 			// Find trip by user's current trip id property
 			Trip.findById(user.currentTrip, function(err, trip){
-				if(err) {
+				if(trip === null) {
 					console.log('Trip with given user as participant not found');
 					console.log(err);
 					res.status(404).end();
@@ -169,7 +169,7 @@ module.exports = {
 				trip.expenses.push(newExpense);
 				// Save update
 				trip.save(function(err, trip){
-					if(err) {	// Error handling for save
+					if(trip === null) {	// Error handling for save
 						console.log('Error saving trip');
 						console.log(err);
 						res.status(500).end();
@@ -190,7 +190,7 @@ module.exports = {
 		delete data._id;
 		// Create past trip according to given trip info
 		PastTrip.create(data, function(err, past){
-			if(err){	// Past trip creation error handling
+			if(past === null){	// Past trip creation error handling
 				console.log('error creating past trip');
 				console.log(err);
 				res.status(500).end();
@@ -198,7 +198,7 @@ module.exports = {
 			} 
 			// Once past trip is created, delete existing trip
 			Trip.findByIdAndRemove(id, function(err, result){
-				if (err) {	// Error handling for trip find removal failure
+				if (result === null) {	// Error handling for trip find removal failure
 					console.log('could not delete trip');
 					console.log(err);
 					res.status(500).end();
@@ -228,7 +228,7 @@ module.exports = {
 					return;
 				}
 				PastTrip.findById(data[0]._id, function (err, data) {
-					if(err) {
+					if(data === null) {
 						console.log('Trip not found after finding user');
 						console.log(err);
 						res.status(404).end();
