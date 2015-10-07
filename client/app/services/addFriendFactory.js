@@ -13,7 +13,10 @@
     function inviteFriend (data, callback) {
       $http.post('/users/invites', data)
       .then(function(result){
-        callback(result.data);
+        callback(result.data)
+      })
+      .catch(function(err) {
+        console.error('You done erred!\n', err);
       });
     };
 

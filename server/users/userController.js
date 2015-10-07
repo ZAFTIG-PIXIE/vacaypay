@@ -77,8 +77,8 @@ module.exports = {
   },
 
   getInvites: function(req, res, next) {
-    var username = req.query.user;
-    console.log(req.query);
+    var username = req.params.user;
+    console.log(username);
     User.findOne({ username: username }, function(error, user) {
       if (!user) {
         console.log('User does not exist');
