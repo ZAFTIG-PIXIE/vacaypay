@@ -87,7 +87,57 @@ module.exports = {
 
 	// Input: id of user and code of trip that the user wishes to join
 	// Output: response body with joined trip info
-	joinTrip: function(req, res){
+	joinTripByCode: function(req, res){
+		var data = req.body;
+		var id = data.id;
+		var code = data.code;
+		// Find trip by code
+		Trip.findOne({code:code}, function(err, trip){
+			if(trip === null){	// Error handling for non-existent trip
+				console.log('Such code does not exist');
+				console.log(err);
+				res.status(404).end('Such code does not exist');
+				return;
+			}
+			// Find user by given id
+			User.findById(id, function(err, user){
+				if(user === null){	// Error handling
+					console.log('couldn\'t find user for some reason');
+					console.log(err);
+					res.status(404).end('User not found');
+					return;
+				}
+				// Set current trip of user to that trip
+				user.currentTrip = trip._id;
+				// Update pending trip particpant info of trip
+				// trip.participants.push({id: user._id, username: user.username});
+				trip.pendingJoin.push({id: user._id, username: user.username});
+				trip.save(function(err, tripresult){	// Save updated info
+					if (err) {	// Error handling for trip update
+						console.log('Problem updating trip');
+						console.log(err);
+						res.status(500).end();
+						return;
+					}
+					// Save edited info
+					user.save(function(err, userresult){
+						if(err){
+							console.log('error saving user');
+							console.log(err);
+							res.status(500).end();
+							return;
+						}
+						res.status(200).send(tripresult).end();
+						return;
+					});
+				});
+			});
+		});
+	},
+
+	// Input: id of user and code of trip that the user wishes to join
+	// Output: response body with joined trip info
+	approveParticipant: function(req, res){
 		var data = req.body;
 		var id = data.id;
 		var code = data.code;
@@ -111,6 +161,12 @@ module.exports = {
 				user.currentTrip = trip._id;
 				// Update participant info of trip
 				trip.participants.push({id: user._id, username: user.username});
+
+				// Remove added participant from pending 
+				trip.pendingJoin = _.rejects(trip.pendingJoin, function(participant){
+					return participant.username === user.username;
+				});
+
 				trip.save(function(err, tripresult){	// Save updated info
 					if (err) {	// Error handling for trip update
 						console.log('Problem updating trip');
