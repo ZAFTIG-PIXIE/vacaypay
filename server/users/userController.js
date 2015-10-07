@@ -73,5 +73,45 @@ module.exports = {
           });
       }
     });
+  },
+
+  getInvites: function(req, res, next) {
+    var username = req.body.user;
+
+    User.findOne({ username: username }, function(error, user) {
+      if (!user) {
+        console.log('User does not exist');
+        res.sendStatus(404);
+      } else {
+        Trip.findOne({ id: user.currentTrip })
+      }
+    });
+  },
+
+  getNotifications: function(req, res, next) {
+
+  },
+
+  addInvite: function(req, res, next) {
+    var username = req.body.user;
+    var code = req.body.code;
+
+    User.findOne({ username: username }, function(error, user) {
+      if (!user) {
+        console.log('User does not exist');
+        res.sendStatus(404);
+      } else {
+        user.invites.push({
+          code: code
+        });
+        user.save(function(err, userdata) {
+          res.sendStatus(200);
+        });
+      }
+    });
+  },
+
+  addNotification: function(req, res, next) {
+
   }
 };

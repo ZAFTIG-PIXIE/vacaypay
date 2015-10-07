@@ -28,6 +28,19 @@ var UserSchema = new Schema({
 		type: [Schema.Types.ObjectId],
 		ref: 'PastTrip'
 	},
+	notifications: [{
+		message: {
+			type: String 
+		},
+		date: {
+			type: Date
+		}
+	}],
+	invites: [{
+		code: {
+			type: String
+		}
+	}],
 	salt: String
 });
 
