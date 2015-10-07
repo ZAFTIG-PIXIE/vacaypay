@@ -36,11 +36,7 @@ var UserSchema = new Schema({
 			type: Date
 		}
 	}],
-	invites: [{
-		code: {
-			type: String
-		}
-	}],
+	invites: [String],
 	salt: String
 });
 
