@@ -7,6 +7,8 @@
 
     $scope.tripCode = '';
     $scope.inviteCode = '';
+    $scope.inviteCreator = '';
+    $scope.inviteTripName = '';
     $scope.recentTrip;
     $scope.totalExpenses;
     $scope.hasRecentTrip = false;
@@ -25,14 +27,17 @@
       });
     };
 
-    $scope.joinTrip = function(code) {
-      Trip.joinTrip(code, function() {
+    $scope.joinTrip = function(code, invited) {
+      Trip.joinTrip(code, invited, function(invited) {
+         //only if creator accepted request in case of selfinvitation
+        if(invited){
         $state.transitionTo('currentTrip.expense');
+      }
       });
     };
 
     $scope.hasTrip = function () {
-      Trip.hasTrip( function (data) {
+      Trip.hasTrip( function (data, option) {
         $scope.data = data;
         if ($scope.data.name) {
           $state.transitionTo('currentTrip.expense');
@@ -58,8 +63,9 @@
       console.log(data);
       AddFriend.getInvites(data, function (results) {
         console.log('These are the results:\n', results);
-        $scope.inviteCode = results.data[0].code;
-        // push the results into dummy array so it can be included in the DOM on update
+        $scope.inviteCode = results.data.data[0].code;
+        $scope.inviteCreator = results.data.data[0].creator.username;
+        $scope.inviteTripName = results.data.data[0].name;
       });
     };
 

@@ -85,6 +85,10 @@ h1 {
   border-radius: 0;
 }
 
+.acceptInviteBtn {
+  background-color: rgba(244,67,54,1);
+}
+
 /*  NAV BAR */
 
 #menu.navbar-default .navbar-brand {

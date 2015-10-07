@@ -21,7 +21,6 @@
       console.log('This is the data passed into getInvites:\n', data);
       $http.get('/users/invites/' + data.username)
       .then(function(result) {
-        console.log("result from AddFriend factory")
         callback(result);
       });
     };
