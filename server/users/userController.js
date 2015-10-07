@@ -2,6 +2,7 @@
 var User = require('./userModel.js');
 var Trip = require('../trips/tripModel.js');
 var jwt = require('jwt-simple');
+var Q = require('q');
 
 module.exports = {
 
@@ -73,5 +74,51 @@ module.exports = {
           });
       }
     });
+  },
+
+  getInvites: function(req, res, next) {
+    var username = req.query.user;
+    console.log(req.query);
+    User.findOne({ username: username }, function(error, user) {
+      if (!user) {
+        console.log('User does not exist');
+        res.sendStatus(404);
+      } else {
+        Trip.find().where('code').in(user.invites)
+        .exec(function(err, trips) {
+          if (err) {
+            console.log('Trip does not exist');
+            res.sendStatus(404);
+          } else {
+            res.status(200).send({ data: trips });
+          }
+        });
+      }
+    });
+  },
+
+  getNotifications: function(req, res, next) {
+
+  },
+
+  addInvite: function(req, res, next) {
+    var username = req.body.user;
+    var code = req.body.code;
+
+    User.findOne({ username: username }, function(error, user) {
+      if (!user) {
+        console.log('User does not exist');
+        res.sendStatus(404);
+      } else {
+        user.invites.push(code);
+        user.save(function(err, userdata) {
+          res.sendStatus(200);
+        });
+      }
+    });
+  },
+
+  addNotification: function(req, res, next) {
+
   }
 };
