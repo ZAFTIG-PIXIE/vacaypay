@@ -1,6 +1,7 @@
 var User = require('../../server/users/userModel.js');
 var Trip = require('./tripModel.js');
 var PastTrip = require('./pastTripModel.js');
+var _ = require('underscore');
 
 module.exports = {
 	// Input: user query that contains user ID
