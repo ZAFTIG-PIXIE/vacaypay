@@ -13,6 +13,13 @@ var TripSchema = new Schema({
 		}, 
 		username: {type: String}
 	},
+	pendingJoin: [{
+		id: {
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		},
+		username: {type: String}
+	}],
 	participants: [{
 		id:{
 			type: Schema.Types.ObjectId,
