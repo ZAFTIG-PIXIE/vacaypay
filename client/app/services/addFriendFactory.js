@@ -4,7 +4,8 @@
   angular.module('app')
  .factory('AddFriend', ['$http', function ($http) {
     var services = {
-      inviteFriend: inviteFriend
+      inviteFriend: inviteFriend,
+      getNotifications: getNotifications
     };
 
     return services;
@@ -15,6 +16,13 @@
         callback(result.data);
       });
     }
+
+    function getNotifications (data, callback) {
+      $http.get('/notificationsEndpoint/' + data.username)
+      .then(function(result) {
+        callback(result);
+      });
+    };
 
     
 

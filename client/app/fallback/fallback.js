@@ -2,14 +2,15 @@
   'use strict';
 
   angular.module('app')
-  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', 'Trip', 'Auth',
-  function ($scope, $http, $modal, $state, $window, Trip, Auth) {
+  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', 'Trip', 'Auth', 'AddFriend',
+  function ($scope, $http, $modal, $state, $window, Trip, Auth, AddFriend) {
 
     $scope.tripCode = '';
     $scope.recentTrip;
     $scope.totalExpenses;
     $scope.hasRecentTrip = false;
     $scope.username = $window.localStorage.getItem('username');
+    $scope.dummy = ['Hi', 'Simon', 'OhNo', 'It\'s Backbone!'];
 
     $scope.logout = function() {
       Auth.signout();
@@ -48,6 +49,17 @@
       });
     };
 
+    $scope.getNotifications = function () {
+      // Set interval for notifications update
+      var data = {};
+      data.username = $scope.username;
+      console.log(data);
+      AddFriend.getNotifications(data, function (results) {
+        console.log('These are the results:\n', results);
+        // push the results into dummy array so it can be included in the DOM on update
+      });
+    };
+
     var totalExpenses = function() {
       $scope.totalExpenses =  $scope.recentTrip.expenses.reduce(function(total, current) {
         return total + parseInt(current.amount);
@@ -56,5 +68,6 @@
 
     $scope.hasTrip();
     $scope.getRecentTrip();
+    $scope.getNotifications();
   }]);
 })();
