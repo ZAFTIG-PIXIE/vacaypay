@@ -4,7 +4,8 @@
   angular.module('app')
  .factory('AddFriend', ['$http', function ($http) {
     var services = {
-      inviteFriend: inviteFriend
+      inviteFriend: inviteFriend,
+      getInvites: getInvites
     };
 
     return services;
@@ -14,7 +15,15 @@
       .then(function(result){
         callback(result.data);
       });
-    }
+    };
+
+    function getInvites (data, callback) {
+      console.log('This is the data passed into getInvites:\n', data);
+      $http.get('/users/invites/' + data.username)
+      .then(function(result) {
+        callback(result);
+      });
+    };
 
     
 

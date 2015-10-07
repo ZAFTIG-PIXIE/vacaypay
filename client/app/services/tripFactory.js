@@ -34,14 +34,18 @@
       });
     }
 
-    function joinTrip(code, callback) {
-      $http.post('/trips/join', {
+    function joinTrip(code, invited, callback) {
+      var endPoint;
+      invited ? endPoint = 'approve' : endPoint = 'join';
+
+      $http.post('/trips/' + endPoint, {
         id: $window.localStorage.getItem('userId'),
         code: code
       })
       .then(function(res) {
+        console.log('This is res.data:\n', res.data);
         cacheTrip(res.data);
-        callback();
+        callback(invited);
       });
     }
 
