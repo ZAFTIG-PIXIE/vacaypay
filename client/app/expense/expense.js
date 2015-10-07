@@ -11,7 +11,7 @@
     var context = $scope;
 
     $scope.inviteFriend = function(name, context) {
-      $scope.addFriend = "";
+      $scope.username = "";
       var cache = $cacheFactory.get('tripData');
       var data = {
                   code: cache.get('code'), 

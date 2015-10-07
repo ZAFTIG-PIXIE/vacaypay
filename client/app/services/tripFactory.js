@@ -37,7 +37,7 @@
     function joinTrip(code, invited, callback) {
       var endPoint;
       invited ? endPoint = 'approve' : endPoint = 'join';
-
+      console.log(endPoint);
       $http.post('/trips/' + endPoint, {
         id: $window.localStorage.getItem('userId'),
         code: code
