@@ -8,12 +8,6 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a ui-sref="pastTrip">Past Trips</a></li>
         <li><a ng-click="logout()">Logout</a></li>
-        <li>
-          <accordion-group heading="Notifications" is-open"status.isFirstOpen">
-          <!--   <div ng-repeat="message in dummy"><div> {{ message }} </div></div> -->
-          I'm in!
-          </accordion-group>
-        </li>
       </ul>
     </div>
   </div>
@@ -24,14 +18,16 @@
     <h2 >Hi, {{ username }}!</h2>
     <p>Click below when you're ready to embark on a new journey!</p>
     <button type="button" class="btn" ng-click="open()">Start Trip</button>
+    <button ng-click="accept(inviteCode)">You've been invited on a magical trip!</button>
+    <div>{{ inviteCode }}</div>
   </div>
 
   <hr>
 
   <div class="jumbotron">
     <p>Friends already on a trip? Type in their trip code to join them!</p>
-    <form name="joinTripForm" ng-submit="joinTrip()">
-      <input type="text" name="code" ng-model="tripCode" placeholder="Trip Code" required>
+    <form name="joinTripForm" ng-submit="joinTrip(tripCode)">
+      <input type="text" name="tripCode" ng-model="tripCode" placeholder="Trip Code" required>
       <button type="submit" class="btn">Join Trip</button>
     </form>
   </div>

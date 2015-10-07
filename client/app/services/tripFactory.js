@@ -40,6 +40,7 @@
         code: code
       })
       .then(function(res) {
+        console.log('This is res.data:\n', res.data);
         cacheTrip(res.data);
         callback();
       });

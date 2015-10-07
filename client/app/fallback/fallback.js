@@ -6,6 +6,7 @@
   function ($scope, $http, $modal, $state, $window, Trip, Auth, AddFriend) {
 
     $scope.tripCode = '';
+    $scope.inviteCode = '';
     $scope.recentTrip;
     $scope.totalExpenses;
     $scope.hasRecentTrip = false;
@@ -24,8 +25,8 @@
       });
     };
 
-    $scope.joinTrip = function() {
-      Trip.joinTrip($scope.tripCode, function() {
+    $scope.joinTrip = function(code) {
+      Trip.joinTrip(code, function() {
         $state.transitionTo('currentTrip.expense');
       });
     };
@@ -49,13 +50,15 @@
       });
     };
 
-    $scope.getNotifications = function () {
+    $scope.getInvites = function () {
       // Set interval for notifications update
+      console.log("invites called");
       var data = {};
       data.username = $scope.username;
       console.log(data);
-      AddFriend.getNotifications(data, function (results) {
+      AddFriend.getInvites(data, function (results) {
         console.log('These are the results:\n', results);
+        $scope.inviteCode = results.data[0].code;
         // push the results into dummy array so it can be included in the DOM on update
       });
     };
@@ -68,6 +71,6 @@
 
     $scope.hasTrip();
     $scope.getRecentTrip();
-    $scope.getNotifications();
+    $scope.getInvites();
   }]);
 })();

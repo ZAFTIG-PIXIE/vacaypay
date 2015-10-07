@@ -5,7 +5,7 @@
  .factory('AddFriend', ['$http', function ($http) {
     var services = {
       inviteFriend: inviteFriend,
-      getNotifications: getNotifications
+      getInvites: getInvites
     };
 
     return services;
@@ -15,11 +15,13 @@
       .then(function(result){
         callback(result.data);
       });
-    }
+    };
 
-    function getNotifications (data, callback) {
-      $http.get('/notificationsEndpoint/' + data.username)
+    function getInvites (data, callback) {
+      console.log('This is the data passed into getInvites:\n', data);
+      $http.get('/users/invites/' + data.username)
       .then(function(result) {
+        console.log("result from AddFriend factory")
         callback(result);
       });
     };
