@@ -2,11 +2,23 @@
   'use strict';
 
   angular.module('app')
-  .controller('ExpenseController', ['$scope', '$modal', '$cacheFactory', 'Trip',
-  function ($scope, $modal, $cacheFactory, Trip) {
+  .controller('ExpenseController', ['$scope', '$modal', '$cacheFactory', 'Trip', 'AddFriend',
+  function ($scope, $modal, $cacheFactory, Trip, AddFriend) {
 
     $scope.data = {};
 
+    $scope.inviteFriend = function(name) {
+      console.log('This is the name passed inot inviteFriend: ', name);
+      $scope.addFriend = "";
+      console.log('This is this:\n', this);
+      var data = {
+                  user:name
+                 };
+      AddFriend.inviteFriend(data, function(result){
+        console.log(result);
+      })
+
+    };
 
     $scope.getExpenses = function() {
       // The trip data cache has not been set yet so need to call has trip here for now...
@@ -16,6 +28,7 @@
         $scope.data.expenses = cache.get('expenses');
       });
     };
+
     
     $scope.getExpenses();
 
