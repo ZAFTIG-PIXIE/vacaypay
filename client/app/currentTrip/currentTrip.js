@@ -13,10 +13,29 @@
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
         $scope.data = data;
+        console.log('This is the scope data:\n', data);
         if (!$scope.data.name) {
           $state.transitionTo('fallback');
         }
       });
+    };
+
+    $scope.approveGuest = function () {
+      var code = $scope.data.code;
+      Trip.joinTrip(code, true);//this might not wokr because in join trip we are actually just adding the user to the group whiches name is curretnly in the local storage
+      //so we are not adding the person that sent the request when we accept it
+      //solution: keep track of user that sent the request
+      //have function that actally gets all the requests and displays them in a div /take that name to add instead of the local storage name
+
+    };
+
+    $scope.addToTrip = function(userID) {
+      console.log("adding user with userID", userID)
+      //get request for all requests of the reuqest for that group
+      //check if user is actual group creator //only show him the requests
+      Trip.joinTrip(code, true, null, userID);//pass in username somehow so that it does not at the guy from the local storage
+
+
     };
 
     $scope.hasTrip();

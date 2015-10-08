@@ -34,18 +34,21 @@
       });
     }
 
-    function joinTrip(code, invited, callback) {
+    function joinTrip(code, invited, callback, user) {
+      var user = user || $window.localStorage.getItem('userId');
       var endPoint;
       invited ? endPoint = 'approve' : endPoint = 'join';
       console.log(endPoint);
       $http.post('/trips/' + endPoint, {
-        id: $window.localStorage.getItem('userId'),
+        id: user, //change this dynamically when accepting invite// if user is provided take it if not take lS
         code: code
       })
       .then(function(res) {
         console.log('This is res.data:\n', res.data);
         cacheTrip(res.data);
-        callback(invited);
+        if(callback){
+          callback(invited);
+        }
       });
     }
 
