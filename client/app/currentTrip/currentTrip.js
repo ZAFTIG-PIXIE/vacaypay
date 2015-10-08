@@ -30,7 +30,8 @@
     };
 
     $scope.addToTrip = function(userID) {
-      console.log("adding user with userID", userID)
+      var code = $scope.data.code;
+      console.log("adding user with userID", userID);
       //get request for all requests of the reuqest for that group
       //check if user is actual group creator //only show him the requests
       Trip.joinTrip(code, true, null, userID);//pass in username somehow so that it does not at the guy from the local storage

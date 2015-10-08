@@ -38,7 +38,7 @@
       var user = user || $window.localStorage.getItem('userId');
       var endPoint;
       invited ? endPoint = 'approve' : endPoint = 'join';
-      console.log(endPoint);
+      console.log('This is our endpoint: ', endPoint);
       $http.post('/trips/' + endPoint, {
         id: user, //change this dynamically when accepting invite// if user is provided take it if not take lS
         code: code

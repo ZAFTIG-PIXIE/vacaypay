@@ -28,6 +28,7 @@
     };
 
     $scope.joinTrip = function(code, invited) {
+      $scope.tripCode = "";
       Trip.joinTrip(code, invited, function(invited) {
          //only if creator accepted request in case of selfinvitation
         if(invited){
