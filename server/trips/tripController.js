@@ -164,7 +164,7 @@ module.exports = {
 				trip.participants.push({id: user._id, username: user.username});
 
 				// Remove added participant from pending 
-				trip.pendingJoin = _.rejects(trip.pendingJoin, function(participant){
+				trip.pendingJoin = _.reject(trip.pendingJoin, function(participant){
 					return participant.username === user.username;
 				});
 

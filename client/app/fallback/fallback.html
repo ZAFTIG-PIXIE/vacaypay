@@ -18,7 +18,7 @@
     <h2 >Hi, {{ username }}!</h2>
     <p>Click below when you're ready to embark on a new journey!</p>
     <button type="button" class="btn" ng-click="open()">Start Trip</button>
-    <button class="btn acceptInviteBtn" ng-show="inviteCode !== ''" ng-click="joinTrip(inviteCode, true)">You've been invited by {{ inviteCreator }} on a magical trip, named {{ inviteTripName }}!</button>
+    <button class="btn acceptInviteBtn" ng-show="inviteCode !== ''" ng-click="joinTrip(inviteCode, true)">{{ inviteCreator }} invited you on a magical trip, named {{ inviteTripName }}!</button>
   </div>
 
   <hr>

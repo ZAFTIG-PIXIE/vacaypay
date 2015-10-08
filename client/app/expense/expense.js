@@ -18,12 +18,9 @@
                   user: name
                  };
       AddFriend.inviteFriend(data, function(result){
-        console.log('This is the $scope.successMessage from inside inviteFriend:\n', $scope.successMessage);
-
         $scope.successMessage = true;
         $timeout(function () {
           $scope.successMessage = false;
-          console.log('This is the $scope.successMessage from inside inviteFriend:\n', $scope.successMessage);
         }, 3000);
       });
 
