@@ -2,9 +2,10 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', ['$scope', '$location', '$state', 'Trip', 'Auth',
-  function ($scope, $location, $state, Trip, Auth) {
+  .controller('CurrentTripController', ['$scope', '$location', '$state','$window', 'Trip', 'Auth',
+  function ($scope, $location, $state, $window, Trip, Auth) {
     $scope.currentTrip = {};
+    $scope.showEndTrip = false;
 
     $scope.logout = function() {
       Auth.signout();
@@ -13,10 +14,13 @@
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
         $scope.data = data;
-        console.log('This is the scope data:\n', data);
+        // console.log('This is the scope data:\n', data);
         if (!$scope.data.name) {
           $state.transitionTo('fallback');
         }
+        // display the end trip button if the current user (determined from localstorage) is the creator
+        $scope.displayEndTrip();
+
       });
     };
 
@@ -35,9 +39,16 @@
       //get request for all requests of the reuqest for that group
       //check if user is actual group creator //only show him the requests
       Trip.joinTrip(code, true, null, userID);//pass in username somehow so that it does not at the guy from the local storage
-
-
     };
+
+    $scope.displayEndTrip = function () {
+      var currentUser = $window.localStorage.getItem('userId');
+      console.log('This is $scope.data:\n', $scope.data);
+      console.log('The current user is ' + currentUser + '\nand the trip creator is ' + $scope.data.creator.id);
+      if (currentUser === $scope.data.creator.id) {
+        $scope.showEndTrip = true;
+      }
+    }
 
     $scope.hasTrip();
 
