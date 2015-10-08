@@ -3,6 +3,10 @@
     <div class="navbar-header"><a class="navbar-brand" ui-sref="fallback">VacayPay</a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
       </button>
+      <button ng-show="data.pendingJoin.length"  class="btn acceptInviteBtn" ng-click="approveGuest()">Someone wants to join your trip!</button>
+      <div ng-repeat="request in data.pendingJoin">
+      <button ng-click="addToTrip(request.id)"class="navbar-toggle">{{request.username}}</button>
+      </div>
     </div>
     <div class="collapse navbar-collapse navbar-menubuilder">
       <ul class="nav navbar-nav navbar-right">
