@@ -21,11 +21,11 @@
       $http.post('/users/signin', user)
       .then(function (res) {
         currentUserId = res.data.user;
-        console.log(currentUserId);
         $window.localStorage.setItem('userId', currentUserId);
         callback(res.data.token);
       }, function (res) {
         console.log('Sign in error');
+        callback(null, true);
       });
     }
 
@@ -39,6 +39,7 @@
         callback(res.data.token);
       }, function (res) {
         console.log('Error during sign up');
+        callback(null, true);
       });
     }
 

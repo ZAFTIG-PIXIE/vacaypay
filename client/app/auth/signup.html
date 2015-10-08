@@ -23,6 +23,9 @@
     <div class="row">
       <input class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4" type="password" name="password" ng-model="user.password" placeholder="Password" required><br>
     </div>
+    <div ng-show="user.userInfoError" class="row">
+      <h4 class=" registerError col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5" type="submit">Username not available</h4>
+    </div>
     <div class="row">
       <button class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5" type="submit">Sign Up</button>
     </div>
