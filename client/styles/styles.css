@@ -7,7 +7,8 @@ a:hover {
 }
 
 h2,
-h5 {
+h5,
+.registerError {
   font-weight: normal;
   color: #d32f2f;
   text-align: center;
