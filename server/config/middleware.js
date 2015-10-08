@@ -6,6 +6,7 @@ var path = require('path');
 module.exports = function(app, express) {
   var tripRouter = express.Router();
   var userRouter = express.Router();
+  var messageRouter = express.Router();
 
   app.use(logger('dev'));
   app.use(bodyParser.json());
@@ -15,8 +16,10 @@ module.exports = function(app, express) {
   
   app.use('/users', userRouter);
   app.use('/trips', tripRouter);
+  app.use('/messages', messageRouter);
 
   require('../users/userRoutes.js')(userRouter);
   require('../trips/tripRoutes.js')(tripRouter);
+  require('../messages/messageRoutes.js')(messageRouter);
 
 };
