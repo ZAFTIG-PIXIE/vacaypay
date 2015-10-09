@@ -90,6 +90,10 @@ h1 {
   background-color: rgba(244,67,54,1);
 }
 
+.venmoBtn {
+  float: right;
+}
+
 /*  NAV BAR */
 
 #menu.navbar-default .navbar-brand {
