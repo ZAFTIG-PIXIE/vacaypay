@@ -41,6 +41,8 @@ module.exports = function(grunt) {
             'client/lib/angular-bootstrap/ui-bootstrap.min.js',
             'client/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
             'client/lib/lodash/dist/lodash.min.js',
+            'client/lib/ng-maps/dist/ng-maps.min.js',
+            'client/lib/ng-timeago/ngtimeago.js',
             'client/lib/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js'
           ],
           dest: 'client/dist/dependencies.min.js'

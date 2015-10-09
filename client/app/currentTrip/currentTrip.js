@@ -2,11 +2,20 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', ['$scope', '$location', '$timeout', '$interval', '$state', '$window', 'Trip', 'Auth', 'Message',
-  function ($scope, $location, $timeout, $interval, $state, $window, Trip, Auth, Message) {
+
+  .controller('CurrentTripController', ['$interval','$scope', '$location', '$timeout','$state', '$window', 'Trip', 'Auth', 'Message', 'timeAgo',
+  function ( $interval, $scope, $location, $timeout, $state, $window, Trip, Auth, Message, timeAgo) {
+    //bower install 
+    console.log(timeAgo, "timeago");
+
+   // $scope.pageLoadTime = (new Date()).toISOString();
+   // $scope.nowTime = nowTime;
+   // $scope.nowTimeAsDateObject = new Date();
+
     $scope.currentTrip = {};
     $scope.showEndTrip = false;
-    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
+    $scope.notifies = [];
+    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
     
     $scope.sendToVenmo = function () {
       $window.location.href = venmoRedirect;
@@ -40,7 +49,11 @@
 
     };
 
+    
     $scope.sendMessage = function(text) {
+
+
+      if(text!=="") {
 
 
       var message = {};
@@ -56,6 +69,16 @@
       .catch(function(error) {
         console.error(error);
       });
+
+      } else {
+        console.log("invalid input");
+        $scope.shower = true;
+
+        $timeout(function() {
+          $scope.shower = false;
+          console.log("going away")
+        }, 5000);
+      }
     };
 
     $scope.getMessages = function() {
@@ -79,8 +102,14 @@
 
     $timeout(function() {
       $scope.getMessages();
+
     },  200);
 
+    $interval(function() {
+      $scope.getMessages();
+
+    }, 2000);
+   
     $scope.addToTrip = function(userID) {
       var code = $scope.data.code;
       //get request for all requests of the reuqest for that group
@@ -101,6 +130,19 @@
     $interval(function(){
       $scope.hasTrip();
     }, 3000);
+
+    // $scope.getNotification = function() {
+    //   var currentUser = $window.localStorage.getItem('username');
+
+    //   Notify.getNotification(currentUser)
+    //   .then(function(result) {
+    //     $scope.notifies.push(result);
+    //   })
+    //   .catch(function(error) {
+    //     console.error(error);
+    //   })
+
+    // };
 
     $scope.calculateExpense = function () {
       Trip.hasTrip( function (data) {

@@ -9,10 +9,8 @@
   function sendMessage(message) {
 
       return $http.post('/messages/messages', message);
-
-
-
     };
+
 
 
    function getMessages(roomname) {

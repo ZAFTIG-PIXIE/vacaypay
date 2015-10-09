@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')    
-  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 
+  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
   function($stateProvider, $urlRouterProvider, $httpProvider){
       
     // For any unmatched url, send to /route1
