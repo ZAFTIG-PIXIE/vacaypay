@@ -29,6 +29,7 @@
     <form name="joinTripForm" ng-submit="joinTrip(tripCode, false)">
       <input type="text" name="tripCode" ng-model="tripCode" placeholder="Trip Code" required>
       <button type="submit" class="btn">Join Trip</button>
+      <button type="submit" class="btn" ng-show="joinTripRequestSent">Join trip request sent!</button>
     </form>
   </div>
 
@@ -63,7 +64,7 @@
 
       <tab heading="Settle Out" selected>
         <ul>
-          <li ng-repeat="transaction in recentTrip.summary"><p>{{ transaction.username }} owes {{ transaction.payee.username }} {{ transaction.payee.amount | currency }}.</p></li>
+          <li ng-repeat="transaction in recentTrip.summary"><p>{{ transaction.username }} owes {{ transaction.payee.username }} {{ transaction.payee.amount | currency }}. <button class="btn venmoBtn" ng-show="true" ng-click="">Request payment through Venmo</button></p></li>
         </ul>
       </tab>
 

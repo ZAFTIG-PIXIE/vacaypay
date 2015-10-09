@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', 'Trip', 'Auth', 'AddFriend',
-  function ($scope, $http, $modal, $state, $window, Trip, Auth, AddFriend) {
+  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', '$timeout', 'Trip', 'Auth', 'AddFriend',
+  function ($scope, $http, $modal, $state, $window, $timeout, Trip, Auth, AddFriend) {
 
     $scope.tripCode = '';
     $scope.inviteCode = '';
@@ -12,6 +12,7 @@
     $scope.recentTrip;
     $scope.totalExpenses;
     $scope.hasRecentTrip = false;
+    $scope.joinTripRequestSent = false;
     $scope.username = $window.localStorage.getItem('username');
 
     var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $scope.username;
@@ -37,8 +38,12 @@
       Trip.joinTrip(code, invited, function(invited) {
          //only if creator accepted request in case of selfinvitation
         if(invited){
-        $state.transitionTo('currentTrip.expense');
-      }
+          $state.transitionTo('currentTrip.expense');
+        }
+        $scope.joinTripRequestSent = true;
+        $timeout(function () {
+          $scope.joinTripRequestSent = false;
+        }, 3000);
       });
     };
 
