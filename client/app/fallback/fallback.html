@@ -31,7 +31,7 @@
       <form name="joinTripForm" ng-submit="joinTrip(tripCode, false)">
         <input type="text" name="tripCode" ng-model="tripCode" placeholder="Trip Code" required>
         <button type="submit" class="btn">Join Trip</button>
-        <button type="submit" class="btn" ng-show="joinTripRequestSent">Join trip request sent!</button>
+        <span type="submit" class="label label-success" ng-show="joinTripRequestSent">Join trip request sent!</span>
       </form>
     </div>
 

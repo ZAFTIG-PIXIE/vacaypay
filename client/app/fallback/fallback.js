@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', '$timeout', 'Trip', 'Auth', 'AddFriend',
-  function ($scope, $http, $modal, $state, $window, $timeout, Trip, Auth, AddFriend) {
+  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', '$timeout', '$interval', 'Trip', 'Auth', 'AddFriend',
+  function ($scope, $http, $modal, $state, $window, $timeout, $interval, Trip, Auth, AddFriend) {
 
     $scope.tripCode = '';
     $scope.inviteCode = '';
@@ -15,7 +15,7 @@
     $scope.joinTripRequestSent = false;
     $scope.username = $window.localStorage.getItem('username');
 
-    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $scope.username;
+    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $scope.username;
     
     $scope.sendToVenmo = function () {
       $window.location.href = venmoRedirect;
@@ -90,6 +90,10 @@
         return total + parseInt(current.amount);
       }, 0);
     };
+
+    $interval(function(){
+      $scope.hasTrip();
+    }, 3000);
 
     $scope.hasTrip();
     $scope.getRecentTrip();
