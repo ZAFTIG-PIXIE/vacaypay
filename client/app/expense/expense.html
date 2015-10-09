@@ -2,7 +2,7 @@
 	<button type="button" class="btn expenseBtn" ng-click="open()">Add An Expense</button>
 	<button type="button" class="btn inviteBtn" ng-click="inviteFriend(username)">Invite a Friend</button>
 	<input type="text" ng-model="username">
-	<button class="btn" ng-show="successMessage">Invitation Sent</button>
+	<span class="label label-success" ng-show="successMessage">Invitation Sent</span>
 	<div ng-controller="ExpenseAccordionController">
 	  <accordion close-others="oneAtATime">
 	    <accordion-group heading="{{ expense.payer.username }} paid for {{expense.name}}" ng-repeat="expense in data.expenses">

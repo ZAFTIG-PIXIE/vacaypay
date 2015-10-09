@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', ['$scope', '$location', '$timeout','$state', '$window', 'Trip', 'Auth', 'Message',
-  function ($scope, $location, $timeout, $state, $window, Trip, Auth, Message) {
+  .controller('CurrentTripController', ['$scope', '$location', '$timeout', '$interval', '$state', '$window', 'Trip', 'Auth', 'Message',
+  function ($scope, $location, $timeout, $interval, $state, $window, Trip, Auth, Message) {
     $scope.currentTrip = {};
     $scope.showEndTrip = false;
     var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
@@ -80,7 +80,6 @@
     $timeout(function() {
       $scope.getMessages();
     },  200);
-   
 
     $scope.addToTrip = function(userID) {
       var code = $scope.data.code;
