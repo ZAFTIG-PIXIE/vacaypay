@@ -36,6 +36,12 @@ var UserSchema = new Schema({
 			type: Date
 		}
 	}],
+	access_token: {
+		type: String
+	},
+	venmoUser: {
+		type: Schema.Types.Mixed
+	},
 	invites: [String],
 	salt: String
 });
