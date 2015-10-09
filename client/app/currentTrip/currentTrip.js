@@ -6,7 +6,7 @@
   function ($scope, $location, $timeout, $interval, $state, $window, Trip, Auth, Message) {
     $scope.currentTrip = {};
     $scope.showEndTrip = false;
-    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
+    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
     
     $scope.sendToVenmo = function () {
       $window.location.href = venmoRedirect;
@@ -98,7 +98,9 @@
 
     $scope.hasTrip();
 
-    
+    $interval(function(){
+      $scope.hasTrip();
+    }, 3000);
 
     $scope.calculateExpense = function () {
       Trip.hasTrip( function (data) {
