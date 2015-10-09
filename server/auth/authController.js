@@ -11,6 +11,7 @@ module.exports = {
     var usercode = req.query.code;
     var username = req.query.user;
 
+    //TODO: client_id and client_secret = environment clientid and secret or venmo.clientid or secret
     var data = {
       client_id: Venmo.CLIENT_ID,
       client_secret: Venmo.CLIENT_SECRET,
@@ -41,6 +42,7 @@ module.exports = {
         }
 
         // Encrypt access tokens
+        //TODO: key = environment encryptkey or venmo.encryptkey
         var encrypted = crypto.AES.encrypt(access_token, Venmo.ENCRYPT_KEY);
         user.access_token = encrypted;
         user.venmoUser = venmoUserData;
