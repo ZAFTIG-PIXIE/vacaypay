@@ -1,8 +1,8 @@
 (function() {
   'use strict';
   angular.module('app')
-  .factory('Trip', ['$http', '$cacheFactory', '$window', 'Auth', 
-  function ($http, $cacheFactory, $window, Auth) {
+  .factory('Trip', ['$http', '$location', '$cacheFactory', '$window', 'Auth', 
+  function ($http, $location, $cacheFactory, $window, Auth) {
 
     var currentUser = $window.localStorage.getItem('userId');
     var username = $window.localStorage.getItem('username');
