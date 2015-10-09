@@ -2,10 +2,15 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', ['$scope', '$location', '$state','$window', 'Trip', 'Auth',
+  .controller('CurrentTripController', ['$scope', '$location', '$state', '$window', 'Trip', 'Auth',
   function ($scope, $location, $state, $window, Trip, Auth) {
     $scope.currentTrip = {};
     $scope.showEndTrip = false;
+    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
+    
+    $scope.sendToVenmo = function () {
+      $window.location.href = venmoRedirect;
+    };
 
     $scope.logout = function() {
       Auth.signout();
@@ -14,13 +19,12 @@
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
         $scope.data = data;
-        // console.log('This is the scope data:\n', data);
+        console.log('This is the scope data:\n', data);
+        console.log('This is the scope currentTrip:\n', $scope.currentTrip);
         if (!$scope.data.name) {
           $state.transitionTo('fallback');
         }
-        // display the end trip button if the current user (determined from localstorage) is the creator
         $scope.displayEndTrip();
-
       });
     };
 
@@ -39,6 +43,8 @@
       //get request for all requests of the reuqest for that group
       //check if user is actual group creator //only show him the requests
       Trip.joinTrip(code, true, null, userID);//pass in username somehow so that it does not at the guy from the local storage
+
+
     };
 
     $scope.displayEndTrip = function () {

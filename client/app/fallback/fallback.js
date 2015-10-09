@@ -13,7 +13,12 @@
     $scope.totalExpenses;
     $scope.hasRecentTrip = false;
     $scope.username = $window.localStorage.getItem('username');
-    $scope.dummy = ['Hi', 'Simon', 'OhNo', 'It\'s Backbone!'];
+
+    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $scope.username;
+    
+    $scope.sendToVenmo = function () {
+      $window.location.href = venmoRedirect;
+    };
 
     $scope.logout = function() {
       Auth.signout();

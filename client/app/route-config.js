@@ -6,7 +6,7 @@
   function($stateProvider, $urlRouterProvider, $httpProvider){
       
     // For any unmatched url, send to /route1
-    $urlRouterProvider.otherwise('/currentTrip');
+    // $urlRouterProvider.otherwise('/currentTrip');
     
     $stateProvider
       .state('signin', {
