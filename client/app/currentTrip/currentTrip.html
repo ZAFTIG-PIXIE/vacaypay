@@ -10,6 +10,7 @@
     </div>
     <div class="collapse navbar-collapse navbar-menubuilder">
       <ul class="nav navbar-nav navbar-right">
+        <li><a ng-click="sendToVenmo()">Signin to use Venmo!</a></li>
         <li><a ui-sref="pastTrip">Past Trips</a></li>
         <li><a ng-click="logout()">Logout</a></li>
       </ul>
@@ -24,7 +25,7 @@
     <!-- <div class="participants" ng-repeat="friends in data.participants">{{ friends.name }}</div> -->
   </div>
 
-  <button ng-show="showEndTrip" ng-click="calculateExpense()" class="btn pull-right endTrip">End Trip</button>
+  <button ng-show="showEndTrip" ng-click="calculateExpense()" class="btn pull-right endTrip">End Trip</a></button>
 
 </div>
 <div class="container-fluid">
