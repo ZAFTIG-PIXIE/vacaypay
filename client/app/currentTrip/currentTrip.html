@@ -1,58 +1,58 @@
 <div id="menu" class="navbar navbar-default " role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand" ui-sref="fallback">VacayPay</a>
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-      </button>
+  <div class="container">
+    <div class="container-fluid">
+      <div class="navbar-header"><a class="navbar-brand" ui-sref="fallback">VacayPay</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse navbar-menubuilder">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a ng-click="sendToVenmo()">Signin to use Venmo!</a></li>
+          <li><a ui-sref="pastTrip">Past Trips</a></li>
+          <li><a ng-click="logout()">Logout</a></li>
+        </ul>
       </div>
     </div>
-    <div class="collapse navbar-collapse navbar-menubuilder">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a ng-click="sendToVenmo()">Signin to use Venmo!</a></li>
-        <li><a ui-sref="pastTrip">Past Trips</a></li>
-        <li><a ng-click="logout()">Logout</a></li>
-      </ul>
-    </div>
   </div>
 </div>
-
-
-<div class="headerChat">Chat with Groupmembers:
-
-<div class=""> 
-  <input ng-model="text"  size="45" > <button class="btn" ng-click="sendMessage(text)">Send to Friends!</button>
-  </div>
-
-<div>
-  <div class="chatbox" ng-repeat="message in messages[0].slice().reverse()">
-
-    <br>
-
-    <div class="message"> 
-      <strong>{{message.message}}</strong> : sent by <strong>{{message.username}}</strong> at {{message.created_at}}
+<div class="container tripContent">
+  <div class="container-fluid">
+    <div class="row tripInfo">
+      <div class="pull-left col-xs-9">
+        <h1 class="tripName">{{ data.name }}</h1>
+        <span class="creator">  started by <strong>{{ data.creator.username }}</strong></span>
+        <!-- <div class="participants" ng-repeat="friends in data.participants">{{ friends.name }}</div> -->
+      </div>
+      <div class="pull-right col-xs-2">
+        <button ng-show="showEndTrip" ng-click="calculateExpense()" class="btn endTrip pull-right">End Trip</a></button>
+      </div>
     </div>
 
+    <div class="row tripBody">
+      <div class="col-xs-6">
+        <div class="container-fluid">
+          <div ui-view></div>
+        </div>
+      </div>
+      <div class="col-xs-6 headerChat">Chat with Groupmembers:
+        <div class=""> 
+          <input ng-model="text"  size="45" >
+          <button class="btn" ng-click="sendMessage(text)">Send to Friends!</button>
+        </div>
 
+        <div>
+          <div class="chatbox" ng-repeat="message in messages[0].slice().reverse()">  
+            <div class="message"> 
+            <strong>{{message.message}}</strong> : sent by <strong>{{message.username}}</strong> at {{message.created_at}}
+            </div>  
+          </div>
+        </div>
+
+        <button ng-show="data.pendingJoin.length"  class="btn pull-right acceptInviteBtn" ng-click="approveGuest()">Someone wants to join your trip!</button>
+
+      </div>
+    </div>
+    
+    <button ng-show="data.pendingJoin.length"  ng-repeat="request in data.pendingJoin" class="btn acceptInviteBtn" ng-click="addToTrip(request.id)">{{ request.username }} wants to join your trip!</button>
   </div>
-
-
-
-
-
 </div>
-
-<div class="container-fluid">
-  <div class="pull-left">
-    <h1 class="tripName">{{ data.name }}</h1>
-    <span class="creator">  started by <strong>{{ data.creator.username }}</strong></span>
-    <!-- <div class="participants" ng-repeat="friends in data.participants">{{ friends.name }}</div> -->
-  </div>
-
-
-  <button ng-show="showEndTrip" ng-click="calculateExpense()" class="btn pull-right">End Trip</a></button>
-
-</div>
-<div class="container-fluid">
-  <div ui-view></div>
-</div>
-<button ng-show="data.pendingJoin.length"  ng-repeat="request in data.pendingJoin" class="btn acceptInviteBtn" ng-click="addToTrip(request.id)">{{ request.username }} wants to join your trip!</button>
-

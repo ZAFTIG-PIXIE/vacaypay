@@ -34,9 +34,9 @@ h1 {
 
 }
 
-.headerChat{
+/*.headerChat{
   margin-left: 300px;
-}
+}*/
 /* BUTTONS */
 
 .btn {
@@ -49,6 +49,10 @@ h1 {
 .btn:focus {
   color: #ffffff;
   background-color: #00abc0;
+}
+
+.container {
+  font-size: 120%;
 }
 
 /* SIGNIN/SIGNUP PAGES */
@@ -111,6 +115,9 @@ h1 {
   float: right;
 }
 
+.endTripBtn {
+  vertical-align: middle;
+}
 /*  NAV BAR */
 
 #menu.navbar-default .navbar-brand {

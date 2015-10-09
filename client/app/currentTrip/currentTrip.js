@@ -90,6 +90,7 @@
 
     $scope.displayEndTrip = function () {
       var currentUser = $window.localStorage.getItem('userId');
+
       if (currentUser === $scope.data.creator.id) {
         $scope.showEndTrip = true;
       }
