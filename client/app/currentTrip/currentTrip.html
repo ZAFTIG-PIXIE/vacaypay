@@ -1,3 +1,4 @@
+
 <div id="menu" class="navbar navbar-default " role="navigation">
   <div class="container-fluid">
     <div class="navbar-header"><a class="navbar-brand" ui-sref="fallback">VacayPay</a>
@@ -14,7 +15,13 @@
     </div>
   </div>
 </div>
-
+<div class="container">
+  <div class="container-fluid">
+    <div class="pull-left">
+      <h1 class="tripName">{{ data.name }}</h1>
+      <span class="creator">  started by <strong>{{ data.creator.username }}</strong></span>
+      <!-- <div class="participants" ng-repeat="friends in data.participants">{{ friends.name }}</div> -->
+    </div>
 
 <div class="headerChat">Chat with Groupmembers:
 
