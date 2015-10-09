@@ -50,9 +50,13 @@
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data, option) {
         $scope.data = data;
-        if ($scope.data.name) {
-          $state.transitionTo('currentTrip.expense');
-        }
+        console.log("This object's .name property must be truthy in order to go to currentTrip view: ", $scope.data);
+        $scope.data.participants.forEach(function(participant) {
+          if (participant.username === $scope.username) {
+            $state.transitionTo('currentTrip.expense');
+          }
+        });
+        
       });
     };
 
