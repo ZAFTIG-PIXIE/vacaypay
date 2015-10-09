@@ -12,6 +12,9 @@
       $window.location.href = venmoRedirect;
     };
 
+    $scope.reloadRoute = function () {
+      $state.reload();
+    }
 
     $scope.logout = function() {
       Auth.signout();
@@ -20,11 +23,10 @@
     $scope.hasTrip = function () {
       Trip.hasTrip( function (data) {
         $scope.data = data;
-        console.log('This is the scope data:\n', data);
-        console.log('This is the scope currentTrip:\n', $scope.currentTrip);
         if (!$scope.data.name) {
           $state.transitionTo('fallback');
         }
+        // if the current user is the creator, display the end trip button
         $scope.displayEndTrip();
       });
     };
@@ -59,15 +61,12 @@
     $scope.getMessages = function() {
 
       var tripcode = $scope.data.code;
-      console.log("scope data is", $scope.data);
-      console.log("i got callled");
 
       Message.getMessages(tripcode)
       .then(function(result) {
 
         $scope.messages = [];
         $scope.messages.push(result.data.data);
-        console.log($scope.messages, "this is the scope messages");
       })
       .catch(function(error) {
 
@@ -85,18 +84,13 @@
 
     $scope.addToTrip = function(userID) {
       var code = $scope.data.code;
-      console.log("adding user with userID", userID);
       //get request for all requests of the reuqest for that group
       //check if user is actual group creator //only show him the requests
-      Trip.joinTrip(code, true, null, userID);//pass in username somehow so that it does not at the guy from the local storage
-
-
+      Trip.joinTrip(code, true, $scope.reloadRoute, userID);//pass in username somehow so that it does not at the guy from the local storage
     };
 
     $scope.displayEndTrip = function () {
       var currentUser = $window.localStorage.getItem('userId');
-      console.log('This is $scope.data:\n', $scope.data);
-      console.log('The current user is ' + currentUser + '\nand the trip creator is ' + $scope.data.creator.id);
       if (currentUser === $scope.data.creator.id) {
         $scope.showEndTrip = true;
       }
