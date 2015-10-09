@@ -1,1 +1,1 @@
-angular.module('app', ['ui.router', 'ui.bootstrap', 'angularjs-dropdown-multiselect']);
+angular.module('app', ['ui.router', 'ui.bootstrap', 'ngtimeago', 'angularjs-dropdown-multiselect']);

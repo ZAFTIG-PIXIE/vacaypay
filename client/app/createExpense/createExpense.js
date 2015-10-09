@@ -32,6 +32,47 @@
       buttonDefaultText: 'Select Contributors'
     };
 
+
+
+    // $scope.addNote = function() {
+
+    //   var notification = {};
+    //   notification.code = $window.localStorage.getItem('code');
+
+    //   //so we are passing in a notification object, that has the amount and the name of the expense in it
+    //   //opertion on the server when get notifications triggers
+    //   //-> get code -> nofifications.find({code: code}).exec(function(err, result) {
+    //     //this will be an array of objects that have the current notifications inside of them
+    //     //next step will be to remove the ones where the current username equals the payername and return all the rest in the rigt format
+    //     //also select only the ones that have not been viewed yet -> after viewing set viewed int to 1 and dont select them any more
+    //     //-> output: "simon" paid for "shushi" for an amount of "100 dollars"
+    //     //making get request in interval when soemthing is been found make it clickable in the navbar
+
+
+    //     //})
+
+    //   notification.expense = {
+    //     amount : $scope.expense.amount;
+    //     name : $scope.expense.name;
+    //     payer : $window.localStorage.getItem('payer');
+
+    //   };
+
+    //   Notify.addNotification(notification)
+    //   .then(function() {
+    //     console.log("sucsess");
+    //   })
+    //   .catch(function(error) {
+    //     console.error("error");
+    //   })
+
+    // };
+
+
+
+
+
+
     $scope.addExpense = function () {
       // If the stakeholders model is empty add the creator to the model
       if(!$scope.stakeholders.length) {

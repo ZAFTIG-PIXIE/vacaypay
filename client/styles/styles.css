@@ -26,8 +26,16 @@ h1 {
   overflow:scroll;
 }
 
+.alert{
+  background-color: red;
+  height: 50px;
+  width: 200px;
+
+}
+
 .message{
-  background-color: #C0C0C0;
+  /*background-color: #C0C0C0;*/
+  background-color: white;
   width: 280px;
   border-radius: 15px;
   padding: 10px;
