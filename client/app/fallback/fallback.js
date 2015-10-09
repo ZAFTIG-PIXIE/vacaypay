@@ -39,11 +39,12 @@
          //only if creator accepted request in case of selfinvitation
         if(invited){
           $state.transitionTo('currentTrip.expense');
+        } else {
+          $scope.joinTripRequestSent = true;
+          $timeout(function () {
+            $scope.joinTripRequestSent = false;
+          }, 3000); 
         }
-        $scope.joinTripRequestSent = true;
-        $timeout(function () {
-          $scope.joinTripRequestSent = false;
-        }, 3000);
       });
     };
 
