@@ -20,6 +20,23 @@ h1 {
   display: inline-block;
 }
 
+.chatbox{
+  color: black;
+ /* margin-left: 200px;*/
+  overflow:scroll;
+}
+
+.message{
+  background-color: #C0C0C0;
+  width: 280px;
+  border-radius: 15px;
+  padding: 10px;
+
+}
+
+.headerChat{
+  margin-left: 300px;
+}
 /* BUTTONS */
 
 .btn {

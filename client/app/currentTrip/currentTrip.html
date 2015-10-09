@@ -18,6 +18,31 @@
   </div>
 </div>
 
+
+<div class="headerChat">Chat with Groupmembers:
+
+<div class=""> 
+  <input ng-model="text"  size="45" > <button class="btn" ng-click="sendMessage(text)">Send to Friends!</button>
+  </div>
+
+<div>
+  <div class="chatbox" ng-repeat="message in messages[0].slice().reverse()">
+
+    <br>
+
+    <div class="message"> 
+      <strong>{{message.message}}</strong> : sent by <strong>{{message.username}}</strong> at {{message.created_at}}
+    </div>
+
+
+  </div>
+
+
+
+
+
+</div>
+
 <div class="container-fluid">
   <div class="pull-left">
     <h1 class="tripName">{{ data.name }}</h1>
