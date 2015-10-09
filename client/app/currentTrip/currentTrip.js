@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('CurrentTripController', ['$scope', '$location', '$state', '$window', 'Trip', 'Auth',
-  function ($scope, $location, $state, $window, Trip, Auth) {
+  .controller('CurrentTripController', ['$scope', '$location', '$timeout','$state', '$window', 'Trip', 'Auth', 'Message',
+  function ($scope, $location, $timeout, $state, $window, Trip, Auth, Message) {
     $scope.currentTrip = {};
     $scope.showEndTrip = false;
     var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
@@ -11,6 +11,7 @@
     $scope.sendToVenmo = function () {
       $window.location.href = venmoRedirect;
     };
+
 
     $scope.logout = function() {
       Auth.signout();
@@ -37,6 +38,51 @@
 
     };
 
+    $scope.sendMessage = function(text) {
+
+
+      var message = {};
+      message.username =  $window.localStorage.getItem('username');
+      message.message = text;
+      message.code = $scope.data.code;
+
+      Message.sendMessage(message)
+      .then(function(result) {
+        $scope.getMessages();
+        $scope.text = "";
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+    };
+
+    $scope.getMessages = function() {
+
+      var tripcode = $scope.data.code;
+      console.log("scope data is", $scope.data);
+      console.log("i got callled");
+
+      Message.getMessages(tripcode)
+      .then(function(result) {
+
+        $scope.messages = [];
+        $scope.messages.push(result.data.data);
+        console.log($scope.messages, "this is the scope messages");
+      })
+      .catch(function(error) {
+
+        console.error(error);
+      })
+   
+     };
+
+    // // $scope.getMessages();
+
+    $timeout(function() {
+      $scope.getMessages();
+    },  200);
+   
+
     $scope.addToTrip = function(userID) {
       var code = $scope.data.code;
       console.log("adding user with userID", userID);
@@ -54,9 +100,11 @@
       if (currentUser === $scope.data.creator.id) {
         $scope.showEndTrip = true;
       }
-    }
+    };
 
     $scope.hasTrip();
+
+    
 
     $scope.calculateExpense = function () {
       Trip.hasTrip( function (data) {
