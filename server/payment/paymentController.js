@@ -13,6 +13,8 @@ module.exports = {
     var amount = req.body.amount;
     var code = req.body.code;
 
+    console.log('Route started');
+    
     User.findOne({username: charger}, function(err, chargeUser){
       if(err){
         console.log('Error retrieving user who is the charger');

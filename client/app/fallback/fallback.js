@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('app')
-  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', '$timeout', '$interval', 'Trip', 'Auth', 'AddFriend',
-  function ($scope, $http, $modal, $state, $window, $timeout, $interval, Trip, Auth, AddFriend) {
+  .controller('FallbackController', ['$scope', '$http', '$modal', '$state', '$window', '$timeout', '$interval', 'Expenses', 'Trip', 'Auth', 'AddFriend',
+  function ($scope, $http, $modal, $state, $window, $timeout, $interval, Expenses, Trip, Auth, AddFriend) {
 
     $scope.tripCode = '';
     $scope.inviteCode = '';
@@ -84,6 +84,22 @@
         $scope.inviteTripName = results.data.data[0].name;
       });
     };
+
+    $scope.sendCharge = function (charger, payer, amount){
+      console.log(charger + ", " + payer + ", " + amount);
+      console.log('Charge started, client side');
+
+      $http.post('/venmo/charge', {
+        charger: charger,
+        payer: payer,
+        amount: amount,
+        code: $scope.recentTrip.code
+      })
+      .then(function (res) {
+        console.log(res.data);
+        return res.data;
+      });
+    }
 
     var totalExpenses = function() {
       $scope.totalExpenses =  $scope.recentTrip.expenses.reduce(function(total, current) {
