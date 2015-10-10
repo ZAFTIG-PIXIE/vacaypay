@@ -93,10 +93,12 @@
 
     $interval(function(){
       $scope.hasTrip();
+      $scope.getInvites();
     }, 3000);
 
     $scope.hasTrip();
     $scope.getRecentTrip();
     $scope.getInvites();
+
   }]);
 })();

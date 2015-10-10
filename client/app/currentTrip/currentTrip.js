@@ -3,19 +3,13 @@
 
   angular.module('app')
 
-  .controller('CurrentTripController', ['$interval','$scope', '$location', '$timeout','$state', '$window', 'Trip', 'Auth', 'Message', 'timeAgo',
-  function ( $interval, $scope, $location, $timeout, $state, $window, Trip, Auth, Message, timeAgo) {
-    //bower install 
-    console.log(timeAgo, "timeago");
-
-   // $scope.pageLoadTime = (new Date()).toISOString();
-   // $scope.nowTime = nowTime;
-   // $scope.nowTimeAsDateObject = new Date();
+  .controller('CurrentTripController', ['$interval','$scope', '$location', '$timeout','$state', '$window', 'Trip', 'Auth', 'Message',
+  function ( $interval, $scope, $location, $timeout, $state, $window, Trip, Auth, Message) {
 
     $scope.currentTrip = {};
     $scope.showEndTrip = false;
-    $scope.notifies = [];
-    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=access_profile&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
+    $scope.usernames = [];
+    var venmoRedirect = 'https://api.venmo.com/v1/oauth/authorize?client_id=2977&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code&redirect_uri=http://localhost:8443/oauth?user=' + $window.localStorage.getItem('username');
     
     $scope.sendToVenmo = function () {
       $window.location.href = venmoRedirect;
@@ -129,6 +123,12 @@
 
     $interval(function(){
       $scope.hasTrip();
+      var users = [];
+      $scope.data.participants.forEach(function(val){
+        users.push(val.username);
+      });
+      $scope.usernames = users;
+      console.log('This is $scope.users:\n\n', $scope.usernames, '\n\n');
     }, 3000);
 
     // $scope.getNotification = function() {
