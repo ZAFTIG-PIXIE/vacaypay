@@ -15,29 +15,39 @@
     </div>
   </div>
 </div>
+<hr>
 <div class="container">
-  <div class="container-fluid">
-    <div>
-      <h2 >Hi, {{ username }}!</h2>
-      <p>Click below when you're ready to embark on a new journey!</p>
-      <button type="button" class="btn" ng-click="open()">Start Trip</button>
-      <button class="btn acceptInviteBtn" ng-show="inviteCode !== ''" ng-click="joinTrip(inviteCode, true)">{{ inviteCreator }} invited you on a magical trip, named {{ inviteTripName }}!</button>
+  <div class="">
+    <h2 >Hi, {{ username }}!</h2>
+  </div>
+</div>
+<hr>
+<hr>
+<div class="container">
+
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="">
+
+          <p>Let us know when you're ready to embark on a new journey!</p>
+          <button type="button" class="btn" ng-click="open()">Start Trip</button>
+          <button class="btn acceptInviteBtn" ng-show="inviteCode !== ''" ng-click="joinTrip(inviteCode, true)">{{ inviteCreator }} invited you on a magical trip, named {{ inviteTripName }}!</button>
+        </div>
+      </div>
+      <div class="pull-right col-xs-6">
+        <div class=""
+          <p>Friends already on a trip? Type in their trip code to join them!</p>
+          <form name="joinTripForm" ng-submit="joinTrip(tripCode, false)">
+          <input type="text" name="tripCode" ng-model="tripCode" placeholder="Trip Code" required>
+          <button type="submit" class="btn">Join Trip</button>
+          <span type="submit" class="label label-success" ng-show="joinTripRequestSent">Join trip request sent!</span>
+          </form>
+        </div>
+      </div>
     </div>
-
     <hr>
-
-    <div>
-      <p>Friends already on a trip? Type in their trip code to join them!</p>
-      <form name="joinTripForm" ng-submit="joinTrip(tripCode, false)">
-        <input type="text" name="tripCode" ng-model="tripCode" placeholder="Trip Code" required>
-        <button type="submit" class="btn">Join Trip</button>
-        <span type="submit" class="label label-success" ng-show="joinTripRequestSent">Join trip request sent!</span>
-      </form>
-    </div>
-
     <hr>
-
-    <div ng-show="hasRecentTrip">
+    <div class="" ng-show="hasRecentTrip">
       <h2>Details from your most recent trip...</h2>
       <tabset justified="true">
 
@@ -74,5 +84,5 @@
       </tabset>
 
     </div>
-  </div>
+  
 </div>

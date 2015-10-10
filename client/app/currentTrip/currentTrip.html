@@ -17,42 +17,48 @@
 </div>
 <div class="container tripContent">
   <div class="container-fluid">
-    <div class="row tripInfo">
-      <div class="pull-left col-xs-9">
-        <h1 class="tripName">{{ data.name }}</h1>
-        <span class="creator">  started by <strong>{{ data.creator.username }}</strong></span>
-        <!-- <div class="participants" ng-repeat="friends in data.participants">{{ friends.name }}</div> -->
-      </div>
-      <div class="pull-right col-xs-2">
-        <button ng-show="showEndTrip" ng-click="calculateExpense()" class="btn endTrip pull-right">End Trip</a></button>
+    <div class="tile row tripInfo">
+      <div class="">
+        <div class=" pull-left col-xs-9">
+          <h1 class="tripName">{{ data.name }}</h1>
+          <span class="creator">  started by <strong>{{ data.creator.username }}</strong></span>
+          <!-- <div class="participants" ng-repeat="friends in data.participants">{{ friends.name }}</div> -->
+        </div>
+        <div class="pull-right col-xs-3">
+          <button ng-show="showEndTrip" ng-click="calculateExpense()" class="btn endTrip pull-right">End Trip</a></button>
+        </div>
+        <div class="pull-left col-xs-4">
+          <button ng-show="data.pendingJoin.length"  ng-repeat="request in data.pendingJoin" class="btn acceptInviteBtn" ng-click="addToTrip(request.id)">{{ request.username }} wants to join your trip!</button>
+        </div>
       </div>
     </div>
 
     <div class="row tripBody">
       <div class="col-xs-6">
-        <div class="container-fluid">
-          <div ui-view></div>
-        </div>
+        
+          <div class="container-fluid">
+            <div ui-view></div>
+          </div>
+
       </div>
-      <div class="col-xs-6 headerChat">Chat with Groupmembers:
-        <div class=""> 
-          <input ng-model="text"  size="45" >
-          <button class="btn" ng-click="sendMessage(text)">Send to Friends!</button>
-          <div ng-show="shower" class="alert">Invalid Input! Try again!</div>
-
-        </div>
-
-        <div>
-          <div class="chatbox" ng-repeat="message in messages[0].slice().reverse()">  
-            <div class="message"> 
-            <strong>{{message.username}}</strong>: {{message.message}}
-            </div>  
+      <div class="col-xs-6 headerChat">
+        <div class="tile">
+          <div class="container-fluid"> 
+            Chat with Groupmembers:
+            <input ng-model="text" >
+            <button class="btn" ng-click="sendMessage(text)">Send to Friends!</button>
+            <div ng-show="shower" class="alert">Invalid Input! Try again!</div>
+          
+            <div class="chatbox panel-group" >  
+              <div class="message panel" ng-repeat="message in messages[0].slice().reverse()"> 
+<!--               <div>{{ message.created_at | timeAgo }}</div>-->
+               <strong>{{message.username}}</strong>: {{message.message}}
+              </div>  
+            </div>
           </div>
         </div>
 
       </div>
     </div>
-    
-    <button ng-show="data.pendingJoin.length"  ng-repeat="request in data.pendingJoin" class="btn acceptInviteBtn" ng-click="addToTrip(request.id)">{{ request.username }} wants to join your trip!</button>
   </div>
 </div>

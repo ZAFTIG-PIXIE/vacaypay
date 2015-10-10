@@ -1,5 +1,5 @@
 body {
-  background-color: #f8f8f8;
+  background-color: #eee;
 }
 
 a:hover {
@@ -22,9 +22,11 @@ h1 {
 
 .chatbox{
   color: black;
+  border: 1px solid #eee;
+  padding: 5px;
  /* margin-left: 200px;*/
-  overflow:scroll;
-}
+/*  overflow:scroll;
+*/}
 
 .alert{
   background-color: red;
@@ -36,9 +38,9 @@ h1 {
 .message{
   /*background-color: #C0C0C0;*/
   background-color: white;
+/*  border-radius: 15px;
   width: 280px;
-  border-radius: 15px;
-  padding: 10px;
+  padding: 10px;*/
 
 }
 
@@ -63,6 +65,11 @@ h1 {
   font-size: 120%;
 }
 
+.tile {
+  margin: 5px;
+  padding: 10px;
+  background-color: #fff;
+}
 /* SIGNIN/SIGNUP PAGES */
 
 .authForm > *,
