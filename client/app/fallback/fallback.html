@@ -66,7 +66,7 @@
 
       <tab heading="Settle Out" selected>
         <ul>
-          <li ng-repeat="transaction in recentTrip.summary"><p>{{ transaction.username }} owes {{ transaction.payee.username }} {{ transaction.payee.amount | currency }}. <button class="btn venmoBtn" ng-show="true" ng-click="">Request payment through Venmo</button></p></li>
+          <li ng-repeat="transaction in recentTrip.summary"><p>{{ transaction.username }} owes {{ transaction.payee.username }} {{ transaction.payee.amount | currency }}. <button class="btn venmoBtn" ng-show="true" ng-click="sendCharge(transaction.payee.username, transaction.username, transaction.payee.amount)">Request payment through Venmo</button></p></li>
         </ul>
       </tab>
 

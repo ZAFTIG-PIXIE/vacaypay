@@ -28,5 +28,21 @@
       });
     }
 
+    function sendCharge (charger, payer, amount, code) {
+
+      console.log('Post request initiated');
+
+      $http.post('/venmo/charge', {
+        charger: charger,
+        payer: payer,
+        amount: amount,
+        code: code
+      })
+      .then(function (res) {
+        console.log(res.data);
+        return res.data;
+      });
+    }
+
   }]);
 })();
