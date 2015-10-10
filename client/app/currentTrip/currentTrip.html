@@ -45,8 +45,7 @@
         <div>
           <div class="chatbox" ng-repeat="message in messages[0].slice().reverse()">  
             <div class="message"> 
-            <div>{{ message.created_at | timeAgo }}</div>
-            <strong>{{message.message}}</strong> : sent by <strong>{{message.username}}</strong>
+            <strong>{{message.username}}</strong>: {{message.message}}
             </div>  
           </div>
         </div>
