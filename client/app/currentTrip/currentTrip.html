@@ -35,24 +35,24 @@
 
     <div class="row tripBody">
       <div class="col-xs-6">
-        <div class="tile">
+        
           <div class="container-fluid">
             <div ui-view></div>
           </div>
-        </div>
+
       </div>
       <div class="col-xs-6 headerChat">
         <div class="tile">
           <div class="container-fluid"> 
             Chat with Groupmembers:
-            <input ng-model="text"  size="45" >
+            <input ng-model="text" >
             <button class="btn" ng-click="sendMessage(text)">Send to Friends!</button>
             <div ng-show="shower" class="alert">Invalid Input! Try again!</div>
           
-            <div class="chatbox" ng-repeat="message in messages[0].slice().reverse()">  
-              <div class="message"> 
+            <div class="chatbox panel-group" >  
+              <div class="message panel" ng-repeat="message in messages[0].slice().reverse()"> 
 <!--               <div>{{ message.created_at | timeAgo }}</div>-->
-              <strong>{{message.message}}</strong> : sent by <strong>{{message.username}}</strong> at {{message.created_at}}
+               <strong>{{message.username}}</strong>: {{message.message}}
               </div>  
             </div>
           </div>
